@@ -6,6 +6,8 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     isBanned: { type: Boolean, default: false },
+    resetToken: { type: String },
+    resetTokenExpiry: { type: Date },
     createdAt: { type: Date, default: Date.now },
 });
 

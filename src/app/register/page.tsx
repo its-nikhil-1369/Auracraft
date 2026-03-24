@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Mail, Lock, User } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
@@ -13,6 +13,7 @@ export default function RegisterPage() {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const { register } = useAuth();
     const router = useRouter();
 
@@ -106,13 +107,20 @@ export default function RegisterPage() {
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     required
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     placeholder="••••••••"
-                                    className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-zinc-900 border-none outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
+                                    className="w-full pl-12 pr-12 py-4 bg-gray-50 dark:bg-zinc-900 border-none outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition-all"
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                >
+                                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                </button>
                             </div>
                         </div>
 
